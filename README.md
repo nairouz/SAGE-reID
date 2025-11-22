@@ -3,7 +3,7 @@
 </h1>
 
 <p align="center">
-  <a href="https://ruopenggao.com" target='_blank'>Ruopeng Gao</a>,&nbsp;
+  <a href="https://ruopenggao.com" target='_blank'>Taha Mustapha Nehdi</a>,&nbsp;
   Ji Qi,&nbsp;
   <a href="https://wanglimin.github.io/" target='_blank'>Limin Wang</a>,&nbsp;
   <br>
