@@ -25,4 +25,8 @@
 
 ## :mag: Overview
 
+**TL; DR.** 
+
+![Overview](./assets/wacv2026pap.png)
+
 Code is under arrangment and preparation and it will be public soon 
