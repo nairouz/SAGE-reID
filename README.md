@@ -4,8 +4,10 @@
 
 <p align="center">
   <a href="https://www.linkedin.com/in/taha-mustapha-nehdi-240585203/" target='_blank'>Taha Mustapha Nehdi</a>,&nbsp;
-  Ji Qi,&nbsp;
-  <a href="https://wanglimin.github.io/" target='_blank'>Limin Wang</a>,&nbsp;
+  <a href="https://www.linkedin.com/in/taha-mustapha-nehdi-240585203/" target='_blank'>Nairouz Mrabah</a>,&nbsp;
+  <a href="https://www.linkedin.com/in/taha-mustapha-nehdi-240585203/" target='_blank'>Atif Belal</a>,&nbsp;
+  <a href="https://www.linkedin.com/in/taha-mustapha-nehdi-240585203/" target='_blank'>Marco Pedersoli</a>,&nbsp;
+  <a href="https://www.linkedin.com/in/taha-mustapha-nehdi-240585203/" target='_blank'>Marco Pedersoli</a>,&nbsp;
   <br>
   Nanjing University <br>
   📧 Primary Contact: ruopenggao@gmail.com
