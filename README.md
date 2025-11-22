@@ -22,6 +22,7 @@
     <img alt="Static Badge" src="https://img.shields.io/badge/WACV%202026-%F0%9F%8C%B5-%235E86C1?style=flat-square">
   </a>
 </p>
+
 ## :mag: Overview
 
-% Code is under arrangment and preparation and it will be public soon 
+Code is under arrangment and preparation and it will be public soon 
