@@ -11,7 +11,7 @@
   <br>
   Quebec University <br>
   École de technologie supérieure (ÉTS) <br>
-  📧 Primary Contact: ruopenggao@gmail.com
+  📧 Primary Contact: taha-mustapha.nehdi.1@ens.etsmtl.ca
 </p>
 
 Code is under arrangment and preparation and it will be public soon 
