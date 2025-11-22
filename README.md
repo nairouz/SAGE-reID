@@ -18,11 +18,8 @@
   <a href="https://arxiv.org/abs/2403.16848" target='_blank'>
     <img alt="Static Badge" src="https://img.shields.io/badge/arXiv-2403.16848-b31b1b?style=flat-square">
   </a>
-  <a href="https://openaccess.thecvf.com/content/CVPR2025/html/Gao_Multiple_Object_Tracking_as_ID_Prediction_CVPR_2025_paper.html">
-    <img alt="Static Badge" src="https://img.shields.io/badge/CVPR 2025-%F0%9F%92%A1-%235E86C1?style=flat-square">
-  </a>
-  <a href="https://zhuanlan.zhihu.com/p/1907113772465759166">
-    <img alt="Static Badge" src="https://img.shields.io/badge/%E7%9F%A5%E4%B9%8E%E8%A7%A3%E8%AF%BB-%F0%9F%93%96-blue?style=flat-square">
+  <a href="">
+    <img alt="Static Badge" src="https://img.shields.io/badge/WACV 2026-%F0%9F%92%A1-%235E86C1?style=flat-square">
   </a>
 </p>
 
