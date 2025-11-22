@@ -19,7 +19,7 @@
     <img alt="Static Badge" src="https://img.shields.io/badge/arXiv-2403.16848-b31b1b?style=flat-square">
   </a>
   <a href="">
-    <img alt="Static Badge" src="https://img.shields.io/badge/WACV 2026-%F0%9F%92%A1-%235E86C1?style=flat-square">
+    <img alt="Static Badge" src="https://img.shields.io/badge/WACV%202026-%F0%9F%8C%B5-%235E86C1?style=flat-square">
   </a>
 </p>
 
