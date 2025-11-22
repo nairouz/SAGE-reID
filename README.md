@@ -25,7 +25,7 @@
 
 ## :mag: Overview
 
-**TL; DR.** 
+**TL; DR.** TL;DR. We propose SAGE-reID, a source-free multi-source domain adaptation framework for person re-identification based on gated LoRA experts. It first learns lightweight source-specific LoRA adapters without accessing source data during adaptation, then uses a small gating network to dynamically merge these experts while keeping the backbone fixed, achieving state-of-the-art accuracy with <2% extra parameters on Market-1501, DukeMTMC-reID, and MSMT17.
 
 ![Overview](./assets/wacv2026pap.png)
 
