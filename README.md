@@ -9,7 +9,8 @@
   <a href="https://www.linkedin.com/in/marco-pedersoli-50677321b/" target='_blank'>Marco Pedersoli</a>,&nbsp;
   <a href="https://www.linkedin.com/in/eric-granger-4062324/" target='_blank'>Eric Granger </a>,&nbsp;
   <br>
-  Nanjing University <br>
+  Quebec University <br>
+  École de technologie supérieure (ÉTS) <br>
   📧 Primary Contact: ruopenggao@gmail.com
 </p>
 
