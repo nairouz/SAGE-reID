@@ -15,7 +15,7 @@
 </p>
 
 <p align="center">
-  <a href="https://arxiv.org/abs/2403.16848" target='_blank'>
+  <a href="https://arxiv.org/abs/2508.06831" target='_blank'>
     <img alt="Static Badge" src="https://img.shields.io/badge/arXiv-2403.16848-b31b1b?style=flat-square">
   </a>
   <a href="">
