@@ -29,4 +29,9 @@
 
 ![Overview](./assets/wacv2026pap.png)
 
+
+## :fire: News
+
+
+
 Code is under arrangment and preparation and it will be public soon 
