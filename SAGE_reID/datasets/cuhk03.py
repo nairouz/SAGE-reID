@@ -85,7 +85,17 @@ class CUHK03(object):
         num_query_imgs = split['num_query_imgs']
         num_gallery_imgs = split['num_gallery_imgs']
         num_total_imgs = num_train_imgs + num_query_imgs
-
+        
+        for i in range(len(train)):
+            train[i][0] = train[i][0].replace("\\","/")
+            train[i] = tuple(train[i])
+        for i in range(len(query)):
+            query[i][0] = query[i][0].replace("\\","/")
+            query[i] = tuple(query[i])
+        for i in range(len(gallery)):
+            gallery[i][0] = gallery[i][0].replace("\\","/")
+            gallery[i] = tuple(gallery[i])
+        
         if verbose:
             print("=> CUHK03 ({}) loaded".format(image_type))
             print("Dataset statistics:")
