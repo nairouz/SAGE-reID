@@ -1,0 +1,8 @@
+numpy 
+scipy 
+h5py
+imageio
+timm==0.5.4
+opencv-python
+loralib 
+scikit-learn
