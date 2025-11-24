@@ -317,3 +317,194 @@ class TripletLoss(object):
         return loss, dist_ap, dist_an
 
 
+
+
+
+class TripletLossCD(nn.Module):
+	'''
+	Compute Triplet loss augmented with Batch Hard
+	Details can be seen in 'In defense of the Triplet Loss for Person Re-Identification'
+	'''
+
+	def __init__(self, margin, normalize_feature=False):
+		super(TripletLossCD, self).__init__()
+		self.margin = margin
+		self.normalize_feature = normalize_feature
+		self.margin_loss = nn.MarginRankingLoss(margin=margin).cuda()
+
+	def forward(self, emb, label, source_classes, cluster_weight_dict):
+		
+		weights = torch.tensor(
+                [cluster_weight_dict.get(t.item() - source_classes, 1.0) for t in label],
+                dtype=torch.float32,
+                device=emb.device
+        ) 
+
+		if self.normalize_feature:
+			emb = F.normalize(emb)
+		mat_dist = euclidean_dist(emb, emb)
+
+		assert mat_dist.size(0) == mat_dist.size(1)
+		N = mat_dist.size(0)
+		mat_sim = label.expand(N, N).eq(label.expand(N, N).t()).float()
+
+		dist_ap, dist_an = _batch_hard(mat_dist, mat_sim)
+		assert dist_an.size(0)==dist_ap.size(0)
+		y = torch.ones_like(dist_ap)
+		loss = self.margin_loss(dist_an * weights, dist_ap * weights, y)
+
+		return loss
+
+
+class SoftTripletLoss(nn.Module):
+
+	def __init__(self, margin=None, normalize_feature=False):
+		super(SoftTripletLoss, self).__init__()
+		self.margin = margin
+		self.normalize_feature = normalize_feature
+
+	def forward(self, emb1, emb2, label):
+		if self.normalize_feature:
+			# equal to cosine similarity
+			emb1 = F.normalize(emb1)
+			emb2 = F.normalize(emb2)
+
+		mat_dist = euclidean_dist(emb1, emb1)
+		assert mat_dist.size(0) == mat_dist.size(1)
+		N = mat_dist.size(0)
+		mat_sim = label.expand(N, N).eq(label.expand(N, N).t()).float()
+
+		dist_ap, dist_an, ap_idx, an_idx = _batch_hard(mat_dist, mat_sim, indice=True)
+		assert dist_an.size(0)==dist_ap.size(0)
+		triple_dist = torch.stack((dist_ap, dist_an), dim=1)
+		triple_dist = F.log_softmax(triple_dist, dim=1)
+		if (self.margin is not None):
+			loss = (- self.margin * triple_dist[:,0] - (1 - self.margin) * triple_dist[:,1]).mean()
+			return loss
+
+		mat_dist_ref = euclidean_dist(emb2, emb2)
+		dist_ap_ref = torch.gather(mat_dist_ref, 1, ap_idx.view(N,1).expand(N,N))[:,0]
+		dist_an_ref = torch.gather(mat_dist_ref, 1, an_idx.view(N,1).expand(N,N))[:,0]
+		triple_dist_ref = torch.stack((dist_ap_ref, dist_an_ref), dim=1)
+		triple_dist_ref = F.softmax(triple_dist_ref, dim=1).detach()
+
+		loss = (- triple_dist_ref * triple_dist).mean(0).sum()
+		return loss
+
+class SoftTripletLossCD(nn.Module):
+
+	def __init__(self, margin=None, normalize_feature=False):
+		super(SoftTripletLossCD, self).__init__()
+		self.margin = margin
+		self.normalize_feature = normalize_feature
+
+	def forward(self, emb1, emb2, label,cluster_weight_dict):
+		if self.normalize_feature:
+			# equal to cosine similarity
+			emb1 = F.normalize(emb1)
+			emb2 = F.normalize(emb2)
+
+		weights = torch.tensor(
+                [cluster_weight_dict.get(t.item(), 1.0) for t in label],
+                dtype=torch.float32,
+                device=emb1.device
+        )    
+
+		mat_dist = euclidean_dist(emb1, emb1)
+		assert mat_dist.size(0) == mat_dist.size(1)
+		N = mat_dist.size(0)
+		mat_sim = label.expand(N, N).eq(label.expand(N, N).t()).float()
+
+		dist_ap, dist_an, ap_idx, an_idx = _batch_hard(mat_dist, mat_sim, indice=True)
+		assert dist_an.size(0)==dist_ap.size(0)
+		triple_dist = torch.stack((dist_ap, dist_an), dim=1)
+		triple_dist = F.log_softmax(triple_dist, dim=1)
+		if (self.margin is not None):
+			loss = (- self.margin * triple_dist[:,0] - (1 - self.margin) * triple_dist[:,1])
+			loss = loss * weights
+			return loss.mean() 
+
+		mat_dist_ref = euclidean_dist(emb2, emb2)
+		dist_ap_ref = torch.gather(mat_dist_ref, 1, ap_idx.view(N,1).expand(N,N))[:,0]
+		dist_an_ref = torch.gather(mat_dist_ref, 1, an_idx.view(N,1).expand(N,N))[:,0]
+		triple_dist_ref = torch.stack((dist_ap_ref, dist_an_ref), dim=1)
+		triple_dist_ref = F.softmax(triple_dist_ref, dim=1).detach()
+
+		loss = (- triple_dist_ref * triple_dist).mean(0).sum()
+		return loss
+
+
+
+class TripletLossXBM(nn.Module):
+    def __init__(self, margin=0.3, norm=False):
+        super(TripletLossXBM, self).__init__()
+        self.margin = margin
+        self.norm = norm
+        self.ranking_loss = nn.MarginRankingLoss(margin=margin)
+
+    def forward(self, inputs_col, targets_col, inputs_row, targets_row):
+
+        n = inputs_col.size(0)
+        if self.norm:
+            inputs_col = F.normalize(inputs_col)
+            inputs_row = F.normalize(inputs_row)
+
+        dist = euclidean_dist(inputs_col, inputs_row)
+
+        # split the positive and negative pairs
+        pos_mask = targets_col.expand(
+            targets_row.shape[0], n
+        ).t() == targets_row.expand(n, targets_row.shape[0])
+        neg_mask = ~pos_mask
+        # For each anchor, find the hardest positive and negative
+        dist_ap, dist_an = [], []
+
+        for i in range(n):
+            dist_ap.append(dist[i][pos_mask[i]].max().unsqueeze(0))
+            dist_an.append(dist[i][neg_mask[i]].min().unsqueeze(0))
+
+        dist_ap = torch.cat(dist_ap)
+        dist_an = torch.cat(dist_an)
+
+        # Compute ranking hinge loss
+        y = torch.ones_like(dist_an)
+        loss = self.ranking_loss(dist_an, dist_ap, y)
+
+        return loss
+
+
+class TripletLossCD(nn.Module):
+	'''
+	Compute Triplet loss augmented with Batch Hard
+	Details can be seen in : 
+    'Camera-Driven Representation Learning for Unsupervised Domain Adaptive Person Re-identification'
+	'''
+
+	def __init__(self, margin, normalize_feature=False):
+		super(TripletLossCD, self).__init__()
+		self.margin = margin
+		self.normalize_feature = normalize_feature
+		self.margin_loss = nn.MarginRankingLoss(margin=margin).cuda()
+
+	def forward(self, emb, label, source_classes, cluster_weight_dict):
+		
+		weights = torch.tensor(
+                [cluster_weight_dict.get(t.item() - source_classes, 1.0) for t in label],
+                dtype=torch.float32,
+                device=emb.device
+        ) 
+
+		if self.normalize_feature:
+			emb = F.normalize(emb)
+		mat_dist = euclidean_dist(emb, emb)
+
+		assert mat_dist.size(0) == mat_dist.size(1)
+		N = mat_dist.size(0)
+		mat_sim = label.expand(N, N).eq(label.expand(N, N).t()).float()
+
+		dist_ap, dist_an = _batch_hard(mat_dist, mat_sim)
+		assert dist_an.size(0)==dist_ap.size(0)
+		y = torch.ones_like(dist_ap)
+		loss = self.margin_loss(dist_an * weights, dist_ap * weights, y)
+
+		return loss

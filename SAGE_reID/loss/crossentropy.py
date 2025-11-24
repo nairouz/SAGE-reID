@@ -37,3 +37,53 @@ class SoftEntropy(nn.Module):
 		log_probs = self.logsoftmax(inputs)
 		loss = (- F.softmax(targets, dim=1).detach() * log_probs).mean(0).sum()
 		return loss
+
+
+
+
+class CrossEntropyLabelSmoothCD(nn.Module):
+	"""
+	Compute CD Cross entropy loss with label smoothing regularizer.
+	Details can be seen in: 
+	'Camera-Driven Representation Learning for Unsupervised Domain Adaptive Person Re-identification'
+
+	Equation: y = (1 - epsilon) * y + epsilon / K.
+
+	Args:
+		num_classes (int): number of classes.
+		epsilon (float): weight.
+	"""
+
+	def __init__(self, num_classes, epsilon=0.1):
+		super(CrossEntropyLabelSmoothCD, self).__init__()
+		self.num_classes = num_classes
+		self.epsilon = epsilon
+		self.logsoftmax = nn.LogSoftmax(dim=1).cuda()
+
+	def forward(self, inputs, targets, cluster_weight_dict):
+		"""
+		Args:
+			inputs: prediction matrix (before softmax) with shape (batch_size, num_classes)
+			targets: ground truth labels with shape (num_classes)
+		"""
+		log_probs = self.logsoftmax(inputs)
+		weights = torch.tensor(
+                [cluster_weight_dict.get(t.item(), 1.0) for t in targets],
+                dtype=torch.float32,
+                device=inputs.device
+        )    
+		log_probs = log_probs * weights.view(-1, 1)
+		targets = torch.zeros_like(log_probs).scatter_(1, targets.unsqueeze(1), 1)
+		targets = (1 - self.epsilon) * targets + self.epsilon / self.num_classes
+		loss = (- targets * log_probs).mean(0).sum()
+		return loss
+
+class SoftEntropy(nn.Module):
+	def __init__(self):
+		super(SoftEntropy, self).__init__()
+		self.logsoftmax = nn.LogSoftmax(dim=1).cuda()
+
+	def forward(self, inputs, targets):
+		log_probs = self.logsoftmax(inputs)
+		loss = (- F.softmax(targets, dim=1).detach() * log_probs).mean(0).sum()
+		return loss

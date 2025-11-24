@@ -170,3 +170,4 @@ class Evaluator(object):
 
         distmat = re_ranking(distmat.numpy(), distmat_qq.numpy(), distmat_gg.numpy())
         return evaluate_all(query_features, gallery_features, distmat, query=query, gallery=gallery, cmc_flag=cmc_flag)
+    

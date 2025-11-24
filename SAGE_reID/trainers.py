@@ -6,7 +6,16 @@ import torch.nn as nn
 from torch.nn import functional as F
 
 from .evaluation_metrics import accuracy
-from .loss import SoftTripletLoss_vallia, CrossEntropyLabelSmooth, SoftTripletLoss, SoftEntropy, TripletLoss
+from .loss import (
+    SoftTripletLoss_vallia, 
+    CrossEntropyLabelSmooth,
+    CrossEntropyLabelSmoothCD, 
+    SoftTripletLoss, 
+    SoftEntropy, 
+    TripletLoss,
+    TripletLossCD,
+    SoftTripletLossCD
+)
 from .utils.meters import AverageMeter
 from torch.cuda import amp
 
@@ -186,3 +195,105 @@ class PreTrainer(object):
         prec = prec[0]
 
         return loss_ce, loss_tr, prec
+
+
+class ClusterBaseTrainer(object):
+    def __init__(self, model, num_cluster=500):
+        super(ClusterBaseTrainer, self).__init__()
+        self.model = model
+        self.num_cluster = num_cluster
+  
+        self.criterion_ce = CrossEntropyLabelSmooth(num_cluster).cuda()
+        self.criterion_ce_cd = CrossEntropyLabelSmoothCD(num_cluster).cuda()
+        #self.criterion_ce = CrossEntropyLabelSmoothW(num_cluster, weight=self.cluster_weights).cuda()
+        
+        
+        self.criterion_tri = SoftTripletLoss(margin=0.0).cuda()
+        self.criterion_tri_cd = SoftTripletLossCD(margin=0.0).cuda()
+
+    
+    def train(self, epoch, data_loader_target, optimizer, print_freq=1, train_iters=200, cluster_weight_dict=None):
+        self.model.train()
+
+        batch_time = AverageMeter()
+        data_time = AverageMeter()
+
+        losses_ce = AverageMeter()
+        losses_tri = AverageMeter()
+        losses_total = AverageMeter()
+        precisions = AverageMeter()
+
+        end = time.time()
+
+        scaler = amp.GradScaler()
+
+        for i in range(train_iters):
+            target_inputs = data_loader_target.next()
+            data_time.update(time.time() - end)
+
+            # process inputs
+            inputs, targets = self._parse_data(target_inputs)
+            
+        
+            # forward
+            f_out_t, p_out_t = self.model(inputs,training=True)
+            #f_out_t, p_out_t = self.model(inputs)
+            p_out_t = p_out_t[:,:self.num_cluster]
+            
+            optimizer.zero_grad()
+            
+            with amp.autocast():  # Forward pass in mixed precision
+                #if epoch == 0:
+                loss_ce = self.criterion_ce(p_out_t, targets)
+                loss_tri = self.criterion_tri(f_out_t, f_out_t, targets)
+                #else:
+                #    loss_ce = self.criterion_ce_cd(p_out_t, targets, cluster_weight_dict)
+                #    loss_tri = self.criterion_tri(f_out_t, f_out_t, targets)
+                loss = loss_ce + loss_tri
+
+            #Backward with scaling
+            scaler.scale(loss).backward()
+            scaler.step(optimizer)
+            scaler.update()
+            
+            #optimizer.zero_grad()
+            #loss.backward()
+            #optimizer.step()
+
+            prec, = accuracy(p_out_t.data, targets.data)
+
+            losses_ce.update(loss_ce.item())
+            losses_tri.update(loss_tri.item())
+            losses_total.update(loss.item())
+            precisions.update(prec[0])
+
+
+
+
+            # print log #
+            batch_time.update(time.time() - end)
+            end = time.time()
+
+            if (i + 1) % print_freq == 0:
+                print('Epoch: [{}][{}/{}]\t'
+                      'Time {:.3f} ({:.3f})\t'
+                      'Data {:.3f} ({:.3f})\t'
+                      'Loss_total {:.3f} ({:.3f})\t'
+                      'Loss_ce {:.3f} ({:.3f})\t'
+                      'Loss_tri {:.3f} ({:.3f})\t'
+                      'Prec {:.2%} ({:.2%})\t'
+                      .format(epoch, i + 1, len(data_loader_target),
+                              batch_time.val, batch_time.avg,
+                              data_time.val, data_time.avg,
+                              losses_total.val, losses_total.avg,
+                              losses_ce.val, losses_ce.avg,
+                              losses_tri.val, losses_tri.avg,
+                              precisions.val, precisions.avg))
+
+ 
+    def _parse_data(self, inputs):
+        imgs, _, pids,_, _ = inputs
+        inputs = imgs.cuda()
+        targets = pids.cuda()
+        return inputs, targets
+    
