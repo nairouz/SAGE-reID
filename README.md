@@ -40,5 +40,5 @@
 
 ## :bouquet: Acknowledgements
 
-This project is built upon [UDAStrongBaseline](https://github.com/zkcys001/UDAStrongBaseline), [LoRA](https://github.com/microsoft/LoRA).
+This project is built upon [UDAStrongBaseline](https://github.com/zkcys001/UDAStrongBaseline), [LoRA](https://github.com/microsoft/LoRA) .
 
