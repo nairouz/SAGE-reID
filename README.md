@@ -35,4 +35,7 @@
 
 - <span style="font-variant-numeric: tabular-nums;">**2025.08.09**</span>: The first version of our paper is released at [arXiv:2508.06831v1](https://arxiv.org/abs/2508.06831)  :pushpin:.
 
+## :dash: Quick Start
+- See [INSTALL.md](./docs/INSTALL.md) for instructions of installing required components.
+
 Code is under arrangment and preparation and it will be public soon 
