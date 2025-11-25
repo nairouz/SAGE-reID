@@ -38,4 +38,7 @@
 ## :dash: Quick Start
 - See [INSTALL.md](./docs/INSTALL.md) for instructions of installing required components.
 
-Code is under arrangment and preparation and it will be public soon 
+## :bouquet: Acknowledgements
+
+This project is built upon [UDAStrongBaseline](https://github.com/zkcys001/UDAStrongBaseline), [LoRA](https://github.com/microsoft/LoRA).
+
