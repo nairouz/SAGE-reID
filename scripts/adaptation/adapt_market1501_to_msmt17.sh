@@ -14,7 +14,7 @@ python target_adapt_dbscan.py \
     --lambda-value 0.3 \
     --lintype lora \
 	--init logs/pretrain/market1501/vitbase/model_best.pth.tar \
-	--logs-dir logs/market1501TOmsmt17/vitbase \
+	--logs-dir logs/adapt/market1501TOmsmt17/vitbase_testtime \
 	--rank 8 \
     --lora_alpha 32 \
 	#--rr-gpu \

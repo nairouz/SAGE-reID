@@ -1,3 +1,3 @@
 # Ignore data and logs folders
-data/
-logs/
+/data/
+/logs/

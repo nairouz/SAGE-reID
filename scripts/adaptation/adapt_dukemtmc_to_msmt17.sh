@@ -13,10 +13,10 @@ torchrun --nproc_per_node=4 --master_port ${MASTER_PORT} \
     -b 64 \
     --epochs 70 \
     --dropout 0 \
-    --lambda-value 0.3 \
+    --lambda-value 0.0 \
     --lintype lora \
-	--init logs/pretrain/market1501/vitbase/model_best.pth.tar \
-	--logs-dir logs/market1501TOmsmt17/vitbase \
+	--init logs/pretrain/dukemtmc/vitbase/model_best.pth.tar \
+	--logs-dir logs/adapt/dukemtmcTOmsmt17/vitbase \
 	--rank 8 \
     --lora_alpha 32 \
 	#--rr-gpu \

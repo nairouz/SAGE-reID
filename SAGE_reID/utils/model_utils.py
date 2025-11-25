@@ -6,6 +6,12 @@ from collections import OrderedDict
 from collections import defaultdict
 import math
 
+
+def mark_only_gate_vector_as_trainable(model, bias = 'none') -> None:
+    for n, p in model.named_parameters():
+        if 'expert_input_gate' not in n and 'tau' not in n:
+            p.requires_grad = False
+
 def compute_cluster_entropy_and_weights(cluster_labels, cluster_cams):
     """
     cluster_labels: list or array of cluster indices (length N)
