@@ -1,6 +1,5 @@
 # Installation
-
-Our codebase is built upon **Python 3.12, PyTorch 2.5.0 (recommended)**. 
+⬇️ Our codebase is built upon **Python 3.12, PyTorch 2.5.0 (recommended)**. 
 
 ## Setup scripts
 
