@@ -31,6 +31,7 @@
 
 
 ## :fire: News
+- <span style="font-variant-numeric: tabular-nums;">**2025.10.06**</span>: Our paper is accepted by WACV 2026 :tada: :tada:. The revised paper and a more efficient codebase will be released in December. Almost there :nerd_face: ~
 
 - <span style="font-variant-numeric: tabular-nums;">**2025.08.09**</span>: The first version of our paper is released at [arXiv:2508.06831v1](https://arxiv.org/abs/2508.06831)  :pushpin:.
 
