@@ -37,6 +37,7 @@
 
 ## :dash: Quick Start
 - See [INSTALL.md](./docs/INSTALL.md) for instructions of installing required components.
+- See [DATASET.md](./docs/DATASET.md) for datasets download and preparation.
 
 ## :bouquet: Acknowledgements
 
