@@ -2,10 +2,10 @@
 
 :link: For all the datasets we used in our experiments, you can access them from the following public link:
 
-- [msmt17](https://github.com/DanceTrack/DanceTrack)
-- [DukeMTMC-re](https://github.com/MCG-NJU/SportsMOT)
-- [market1501](https://george-zhuang.github.io/nettrack/)
-- [CUHK03](https://www.crowdhuman.org/)
+- msmt17 [paper](https://github.com/DanceTrack/DanceTrack)
+- DukeMTMC-reID [paper](https://github.com/DanceTrack/DanceTrack)
+- market1501 [paper](https://github.com/DanceTrack/DanceTrack)
+- CUHK03 [paper](https://github.com/DanceTrack/DanceTrack)
 
 ## Generate GT files
 
