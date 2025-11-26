@@ -38,6 +38,7 @@
 ## :dash: Quick Start
 - See [INSTALL.md](./docs/INSTALL.md) for instructions of installing required components.
 - See [DATASET.md](./docs/DATASET.md) for datasets download and preparation.
+- See [GET_STARTED.md](./docs/GET_STARTED.md) for how to get started with our SAGE-reID, including pre-training, adaptation, and Low-Rank Merging.
 
 ## :bouquet: Acknowledgements
 
