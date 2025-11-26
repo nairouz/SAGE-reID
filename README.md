@@ -78,7 +78,6 @@ pip install -t requirments.txt
 ```
 
 ## :dash: Quick Start
-- See [DATASET.md](./docs/DATASET.md) for datasets download and preparation.
 - See [GET_STARTED.md](./docs/GET_STARTED.md) for how to get started with our SAGE-reID, including pre-training, adaptation, and Low-Rank merging.
 
 ## :bouquet: Acknowledgements
