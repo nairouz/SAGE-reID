@@ -35,6 +35,24 @@
 
 - <span style="font-variant-numeric: tabular-nums;">**2025.08.09**</span>: The first version of our paper is released at [arXiv:2508.06831v1](https://arxiv.org/abs/2508.06831)  :pushpin:.
 
+## ⬇️ Installation
+Our codebase is built upon **Python 3.12, PyTorch 2.5.0 (recommended)**. 
+
+### Setup scripts
+
+```shell
+conda create -n SAGE-reID python=3.12		# suggest to use virtual envs
+conda activate SAGE-reID
+# PyTorch:
+# CUDA 12.4
+pip install torch==2.5.0 torchvision==0.20.0 torchaudio==2.5.0 --index-url https://download.pytorch.org/whl/cu124
+# Other dependencies:
+pip install -t requirments.txt
+```
+
+
+
+
 ## :dash: Quick Start
 - See [INSTALL.md](./docs/INSTALL.md) for instructions of installing required components.
 - See [DATASET.md](./docs/DATASET.md) for datasets download and preparation.
