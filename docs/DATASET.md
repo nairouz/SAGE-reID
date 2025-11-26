@@ -5,16 +5,7 @@
 - msmt17 [paper](https://arxiv.org/abs/1711.08565), [Link](https://www.pkuvmc.com/dataset.html)
 - DukeMTMC-reID [paper](https://arxiv.org/abs/1609.01775), [Link](https://www.kaggle.com/datasets/whurobin/dukemtmcreid)
 - Market1501 [paper](https://www.cv-foundation.org/openaccess/content_iccv_2015/html/Zheng_Scalable_Person_Re-Identification_ICCV_2015_paper.html), [Link](https://drive.google.com/file/d/0B8-rUzbwVRk0c054eEozWG9COHM/view?resourcekey=0-8nyl7K9_x37HlQm34MmrYQ)
-- CUHK03 [paper](https://arxiv.org/abs/2101.10774), [Link](https://arxiv.org/abs/1711.08565)
-
-## Generate GT files
-
-For the BFT and CrowdHuman datasets, you’ll need to use the provided script to convert their ground truth files to the format we require:
-
-- For BFT: [gen_bft_gts.py](../tools/gen_bft_gts.py)
-- For CrowdHuman: [gen_crowdhuman_gts.py](../tools/gen_crowdhuman_gts.py)
-
-:pushpin: You need to modify the paths in the script according to your requirements.
+- CUHK03 [paper](https://arxiv.org/abs/2101.10774), [Link](https://www.kaggle.com/datasets/priyanagda/cuhk03)
 
 ## File Tree
 
