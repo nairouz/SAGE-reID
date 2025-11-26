@@ -113,6 +113,7 @@ Once the low-rank experts from Market1501, DukeMTMC-reID, and CUHK03 have been a
 ```bash
 sh scripts/merging/adapt_market1501_cuhk03_dukemtmc_to_msmt17.sh
 ```
+Using this script, you can achieve 44.1 mAP & 69.8 R1 on msmt17 test set. There is a relatively high instability (~ 0.8) 
 
 ## :bouquet: Acknowledgements
 
