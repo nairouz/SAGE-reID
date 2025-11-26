@@ -42,3 +42,15 @@
 
 This project is built upon [UDAStrongBaseline](https://github.com/zkcys001/UDAStrongBaseline), [LoRA](https://github.com/microsoft/LoRA) .
 
+## :pencil2: Citation
+
+If you think this project is helpful, please feel free to leave a :star: and cite our paper:
+
+```tex
+@article{nehdi2025low,
+  title={Low-Rank Expert Merging for Multi-Source Domain Adaptation in Person Re-Identification},
+  author={Nehdi, Taha Mustapha and Mrabah, Nairouz and Belal, Atif and Pedersoli, Marco and Granger, Eric},
+  journal={arXiv preprint arXiv:2508.06831},
+  year={2025}
+}
+```
