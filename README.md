@@ -77,7 +77,42 @@ pip install -t requirments.txt
 ```
 
 ## :dash: Quick Start
-pending
+
+In this documentation, we will primarily focus on pre-training, adaptation, and Low-Rank Merging on msmt17 benchmarks as example feel free to try other benchmarks. All the configurations corresponding to our experiments are stored in the [scripts](../scripts/) folder. You can also customize the configuration files according to your own requirements.
+
+### ImageNet Pre-trained Weights
+
+:floppy_disk: ​Similar to many methods in the literature, we use the ViT-B/16 (vit_base_patch16_224) model initialized with ImageNet-1k pre-trained weights. Various ViT model variants are also available in [vit.py](../SAGE_reID/models/vit.py).
+
+- Deformable DETR: [[official repo](https://github.com/fundamentalvision/Deformable-DETR)] [[our repo](https://github.com/MCG-NJU/MOTIP/releases/download/v0.1/r50_deformable_detr_coco.pth)]
+
+### Pre-train ViT-B/16 on Specific Source Datasets
+
+we will first pre-train ViT-B/16 on the corresponding dataset (source dataset) to serve as the initialization for subsequent domain adaptation step.
+
+For example, you can pre-train a ViT-B/16 model on market1501 as follows:
+
+```bash
+sh scripts/pre_train/pre_market1501.sh
+```
+
+### Source to Target Domain Adaptation 
+
+In this step, we perform source-to-target domain adaptation using deep clustering in a source-free setting, relying only on initializing our model with source pre-trained weights.
+
+For example, you can adapt from market1501 to msmt17 as follows:
+
+```bash
+sh scripts/adaptation/adapt_market1501_to_msmt17.sh
+```
+
+### Low-Rank Adapters Merging 
+
+Once the low-rank experts from Market1501, DukeMTMC-reID, and CUHK03 have been adapted to MSMT17 and the adapted experts have been saved, we proceed in this step to merge them.
+
+```bash
+sh scripts/merging/adapt_market1501_cuhk03_dukemtmc_to_msmt17.sh
+```
 
 ## :bouquet: Acknowledgements
 
