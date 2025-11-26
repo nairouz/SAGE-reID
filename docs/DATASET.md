@@ -2,8 +2,8 @@
 
 :link: For all the datasets we used in our experiments, you can access them from the following public link:
 
-- msmt17 [paper](https://github.com/DanceTrack/DanceTrack)
-- DukeMTMC-reID [paper](https://github.com/DanceTrack/DanceTrack)
+- msmt17 [paper](https://arxiv.org/abs/1711.08565)
+- DukeMTMC-reID [paper](https://arxiv.org/abs/1609.01775)
 - market1501 [paper](https://github.com/DanceTrack/DanceTrack)
 - CUHK03 [paper](https://github.com/DanceTrack/DanceTrack)
 
