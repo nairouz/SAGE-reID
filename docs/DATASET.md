@@ -10,39 +10,17 @@
 ## File Tree
 
 ```text
-<DATADIR>/
-  ├── DanceTrack/
-  │ ├── train/
-  │ ├── val/
-  │ ├── test/
-  │ ├── train_seqmap.txt
-  │ ├── val_seqmap.txt
-  │ └── test_seqmap.txt
-  ├── SportsMOT/
-  │ ├── train/
-  │ ├── val/
-  │ ├── test/
-  │ ├── train_seqmap.txt
-  │ ├── val_seqmap.txt
-  │ └── test_seqmap.txt
-  ├── BFT/
-  │ ├── train/
-  │ ├── val/
-  │ ├── test/
-  │ ├── annotations_mot/    # used for generate gts for BFT
-  │ ├── train_seqmap.txt
-  │ ├── val_seqmap.txt
-  │ └── test_seqmap.txt
-  └── CrowdHuman/
-    ├── images/
-    │ ├── train/     # unzip from CrowdHuman
-    │ └── val/       # unzip from CrowdHuman
-    └── gts/
-      ├── train/     # generate by ./data/gen_crowdhuman_gts.py
-      └── val/       # generate by ./data/gen_crowdhuman_gts.py
+./data
+├── dukemtmc
+│  └── DukeMTMC-reID
+├── market1501
+│  └── Market-1501-v15.09.15
+├── msmt17
+|   └── MSMT17_V2
+├── cuhk03
+|   └── images_detected
+|   └── images_labeled
+|   └── cuhk03_new_protocol_config_detected.mat
+|   └── cuhk03_new_protocol_config_labeled.mat
+    ...
 ```
-
-## Q & A
-
-- Q: Lack the `val_seqmap.txt` file of SportsMOT? </br>
-  A: Refer to [The 'val_seqmap.txt' file of SportsMOT dataset · Issue #13](https://github.com/MCG-NJU/MOTIP/issues/13)
