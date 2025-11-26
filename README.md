@@ -78,7 +78,7 @@ pip install -t requirments.txt
 ```
 
 ## :dash: Quick Start
-- See [GET_STARTED.md](./docs/GET_STARTED.md) for how to get started with our SAGE-reID, including pre-training, adaptation, and Low-Rank merging.
+pending
 
 ## :bouquet: Acknowledgements
 
