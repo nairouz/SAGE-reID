@@ -8,28 +8,16 @@ In this documentation, we will primarily focus on pre-training, adaptation, and 
 
 - Deformable DETR: [[official repo](https://github.com/fundamentalvision/Deformable-DETR)] [[our repo](https://github.com/MCG-NJU/MOTIP/releases/download/v0.1/r50_deformable_detr_coco.pth)]
 
-### Pre-train  ViT-B/16 on Specific Source Datasets
+### Pre-train ViT-B/16 on Specific Source Datasets
 
 we will first pre-train  ViT-B/16 on the corresponding dataset (source dataset) to serve as the initialization for subsequent domain adaptation step.
 
-#### Our Pre-trained Weights
+#### Source Pre-training Scripts
 
-:floppy_disk: **We recommend directly using our pre-trained DETR weights, which are stored in the [model zoo](./MODEL_ZOO.md#DETR).** If needed, you can pre-train it yourself using the script provided below.
-
-You should put necessary pre-trained weights into `./pretrains/` directory as default.
-
-#### Pre-training Scripts
-
-**All our pre-train scripts follows the template script below.** You'll need to fill the `<placeholders>` according to your requirements:
+For example, you can pre-train a ViT-B/16 model on market1501 as follows:
 
 ```bash
-accelerate launch --num_processes=8 train.py --data-root <data dir> --exp-name <exp name> --config-path <.yaml config file path>
-```
-
-For example, you can pre-train a Deformable-DETR model on DanceTrack as follows:
-
-```bash
-accelerate launch --num_processes=8 train.py --data-root ./datasets/ --exp-name pretrain_r50_deformable_detr_dancetrack --config-path ./configs/pretrain_r50_deformable_detr_dancetrack.yaml
+sh scripts/pre_train/pre_market1501.sh
 ```
 
 #### Gradient Checkpoint
