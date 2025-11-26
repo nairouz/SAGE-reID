@@ -8,9 +8,9 @@ In this documentation, we will primarily focus on pre-training, adaptation, and 
 
 - Deformable DETR: [[official repo](https://github.com/fundamentalvision/Deformable-DETR)] [[our repo](https://github.com/MCG-NJU/MOTIP/releases/download/v0.1/r50_deformable_detr_coco.pth)]
 
-### Pre-train DETR on Specific Datasets
+### Pre-train  ViT-B/16 on Specific Source Datasets
 
-To accelerate the convergence, we will first pre-train DETR on the corresponding dataset (target dataset) to serve as the initialization for subsequent MOTIP training.
+we will first pre-train  ViT-B/16 on the corresponding dataset (source dataset) to serve as the initialization for subsequent domain adaptation step.
 
 #### Our Pre-trained Weights
 
