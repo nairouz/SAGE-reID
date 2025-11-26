@@ -9,7 +9,6 @@
   <a href="https://www.linkedin.com/in/marco-pedersoli-50677321b/" target='_blank'>Marco Pedersoli</a>,&nbsp;
   <a href="https://www.linkedin.com/in/eric-granger-4062324/" target='_blank'>Eric Granger </a>,&nbsp;
   <br>
-  Quebec University <br>
   École de technologie supérieure (ÉTS) <br>
   📧 Primary Contact: taha-mustapha.nehdi.1@ens.etsmtl.ca
 </p>
