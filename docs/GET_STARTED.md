@@ -2,13 +2,9 @@
 
 In this documentation, we will primarily focus on pre-training, adaptation, and Low-Rank Merging on msmt17 benchmarks as example feel free to try other benchmarks. All the configurations corresponding to our experiments are stored in the [scripts](../scripts/) folder. You can also customize the configuration files according to your own requirements.
 
-## Pre-training
+### Imagenet Pre-trained Weights
 
-To expedite the training process, we’ll begin by pre-training the DETR component of the model. Typically, training the DETR model on a specific dataset (like DanceTrack, SportsMOT, etc.) is quite efficient, taking only a few hours.
-
-### COCO Pre-trained Weights
-
-:floppy_disk: ​Similar to many other methods (e.g., MOTR and MeMOTR), we also use COCO pre-trained DETR weights for initialization. You can obtain them from the following links:
+:floppy_disk: ​Similar to many methods in the literature, we use the ViT-B/16 (vit_base_patch16_224) model initialized with ImageNet-1k pre-trained weights. Various ViT model variants are also available in [vit.py](../SAGE_reID/models/vit.py).
 
 - Deformable DETR: [[official repo](https://github.com/fundamentalvision/Deformable-DETR)] [[our repo](https://github.com/MCG-NJU/MOTIP/releases/download/v0.1/r50_deformable_detr_coco.pth)]
 
