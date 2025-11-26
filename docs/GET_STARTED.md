@@ -10,9 +10,7 @@ In this documentation, we will primarily focus on pre-training, adaptation, and 
 
 ### Pre-train ViT-B/16 on Specific Source Datasets
 
-we will first pre-train  ViT-B/16 on the corresponding dataset (source dataset) to serve as the initialization for subsequent domain adaptation step.
-
-#### Source Pre-training Scripts
+we will first pre-train ViT-B/16 on the corresponding dataset (source dataset) to serve as the initialization for subsequent domain adaptation step.
 
 For example, you can pre-train a ViT-B/16 model on market1501 as follows:
 
@@ -20,9 +18,15 @@ For example, you can pre-train a ViT-B/16 model on market1501 as follows:
 sh scripts/pre_train/pre_market1501.sh
 ```
 
-#### Gradient Checkpoint
+### Source to Target Domain Adaptation 
 
-Please referring to [here](./GET_STARTED.md#gradient-checkpoint) to get more information.
+In this step, we perform source-to-target domain adaptation using deep clustering in a source-free setting, relying only on initializing our model with source pre-trained weights.
+
+For example, you can adapt from market1501 to msmt17 as follows:
+
+```bash
+sh scripts/adaptation/adapt_market1501_to_msmt17.sh
+```
 
 ## Training
 
