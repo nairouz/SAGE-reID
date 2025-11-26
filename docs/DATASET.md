@@ -4,7 +4,7 @@
 
 - msmt17 [paper](https://arxiv.org/abs/1711.08565)
 - DukeMTMC-reID [paper](https://arxiv.org/abs/1609.01775)
-- market1501 [paper](https://github.com/DanceTrack/DanceTrack)
+- Market1501 [paper](https://github.com/DanceTrack/DanceTrack)
 - CUHK03 [paper](https://github.com/DanceTrack/DanceTrack)
 
 ## Generate GT files
