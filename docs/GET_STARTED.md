@@ -1,6 +1,6 @@
 # Get Started
 
-In this documentation, we will primarily focus on training and inference of our MOTIP model on the relevant MOT benchmarks. All the configurations corresponding to our experiments are stored in the [configs](../configs/) folder. You can also customize the configuration files according to your own requirements.
+In this documentation, we will primarily focus on pre-training, adaptation, and Low-Rank Merging on msmt17 benchmarks as example feel free to try other benchmarks. All the configurations corresponding to our experiments are stored in the [scripts](../scripts/) folder. You can also customize the configuration files according to your own requirements.
 
 ## Pre-training
 
